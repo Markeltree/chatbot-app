@@ -19,8 +19,21 @@ model User {
 
   chats Chat[]
   settings UserSettings?
+  memories Memory[]
 
   @@map("users")
+}
+
+model Memory {
+  id        String   @id @default(cuid())
+  userId    String
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("memories")
 }
 
 model UserSettings {

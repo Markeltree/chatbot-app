@@ -230,34 +230,36 @@ export default function ChatWindow({ chatId, onNewChat }: ChatWindowProps) {
   return (
     <div className="flex-1 flex flex-col bg-white">
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.length === 0 ? (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center text-gray-500">
-              <p className="text-lg mb-2">No messages yet</p>
-              <p className="text-sm">Start the conversation by sending a message</p>
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="max-w-3xl mx-auto w-full space-y-4">
+          {messages.length === 0 ? (
+            <div className="flex items-center justify-center h-[60vh]">
+              <div className="text-center text-gray-500">
+                <p className="text-lg mb-2">No messages yet</p>
+                <p className="text-sm">Start the conversation by sending a message</p>
+              </div>
             </div>
-          </div>
-        ) : (
-          messages.map(message => (
-            <MessageBubble key={message.id} message={message} />
-          ))
-        )}
-        {loading && messages[messages.length - 1]?.role !== 'assistant' && (
-          <div className="flex justify-start">
-            <div className="glass-effect px-4 py-2 rounded-lg flex gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" />
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.2s' }} />
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.4s' }} />
+          ) : (
+            messages.map(message => (
+              <MessageBubble key={message.id} message={message} />
+            ))
+          )}
+          {loading && messages[messages.length - 1]?.role !== 'assistant' && (
+            <div className="flex justify-start">
+              <div className="glass-effect px-4 py-2 rounded-lg flex gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" />
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.2s' }} />
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.4s' }} />
+              </div>
             </div>
-          </div>
-        )}
-        <div ref={messagesEndRef} />
+          )}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
 
       {/* File Attachments Display */}
       {attachedFiles.length > 0 && (
-        <div className="px-4 py-2 border-t border-gray-200 flex flex-wrap gap-2">
+        <div className="max-w-3xl mx-auto w-full px-4 py-2 border-t border-gray-200 flex flex-wrap gap-2">
           {attachedFiles.map((att) => (
             <div key={att.id} className="bg-gray-100 border border-gray-200 rounded-lg overflow-hidden flex items-center gap-2 pr-2 text-gray-700">
               {att.previewUrl ? (
@@ -277,7 +279,7 @@ export default function ChatWindow({ chatId, onNewChat }: ChatWindowProps) {
 
       {/* Input Area */}
       <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-4">
-        <div className="flex gap-3">
+        <div className="max-w-3xl mx-auto w-full flex gap-3">
           <input
             type="file"
             ref={fileInputRef}

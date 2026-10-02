@@ -86,6 +86,48 @@ class AIClient {
     }
   }
 
+  async extractMemories(
+    userMessage: string,
+    assistantMessage: string,
+    existingMemories: string[]
+  ): Promise<string[]> {
+    if (!userMessage.trim()) return []
+
+    try {
+      const response = await this.anthropic.messages.create({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 300,
+        system:
+          'You extract durable facts about a user from a chat exchange (name, job, skills, preferences, goals, tools they use, likes/dislikes, etc.) so a chatbot can remember them in future conversations. Only extract facts stated or clearly implied by the USER, never facts about the assistant. Skip small talk, one-off requests, and anything already known. Reply with ONLY a JSON array of short fact strings (max 15 words each). If there is nothing new worth remembering, reply with exactly [].',
+        messages: [
+          {
+            role: 'user',
+            content: `Known facts so far:\n${
+              existingMemories.length ? existingMemories.map(m => `- ${m}`).join('\n') : '(none)'
+            }\n\nNew exchange:\nUser: ${userMessage}\nAssistant: ${assistantMessage.slice(0, 1000)}\n\nExtract any NEW facts not already known.`,
+          },
+        ],
+      })
+
+      const content = response.content[0]
+      if (content.type === 'text') {
+        const match = content.text.match(/\[[\s\S]*\]/)
+        if (match) {
+          const facts = JSON.parse(match[0])
+          if (Array.isArray(facts)) {
+            return facts.filter(
+              (f): f is string => typeof f === 'string' && f.trim().length > 0
+            )
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Memory extraction error:', error)
+    }
+
+    return []
+  }
+
   async generateChatTitle(
     firstMessage: string
   ): Promise<string> {

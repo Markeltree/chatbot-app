@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { after } from 'next/server'
 import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
 import { randomUUID } from 'crypto'
@@ -107,6 +108,7 @@ export async function POST(
         id: chatId,
         userId: payload.userId,
       },
+      include: { user: true },
     })
 
     if (!chat) {
@@ -156,6 +158,12 @@ export async function POST(
     const isFirstMessage = priorMessages.length === 1
     const encoder = new TextEncoder()
 
+    const memories = await prisma.memory.findMany({
+      where: { userId: chat.userId },
+      orderBy: { createdAt: 'desc' },
+      take: 50,
+    })
+
     const stream = new ReadableStream({
       async start(controller) {
         // Let the client swap its optimistic message for the real, persisted one
@@ -163,9 +171,26 @@ export async function POST(
 
         let aiResponse = ''
         try {
+          const systemPromptParts = [
+            'You are a helpful, knowledgeable AI assistant. Provide clear, concise, and accurate answers.',
+          ]
+          if (chat.user.name) {
+            systemPromptParts.push(
+              `The user's name is ${chat.user.name}; address them by name when it feels natural.`
+            )
+          }
+          if (memories.length > 0) {
+            systemPromptParts.push(
+              `Here is what you remember about this user from past conversations:\n${memories
+                .map(m => `- ${m.content}`)
+                .join('\n')}`
+            )
+          }
+          const systemPrompt = systemPromptParts.join('\n\n')
+
           const aiStream = await aiClient.streamChatWithAnthropic(
             conversationHistory,
-            'You are a helpful, knowledgeable AI assistant. Provide clear, concise, and accurate answers.'
+            systemPrompt
           )
 
           for await (const chunk of aiStream) {
@@ -214,6 +239,40 @@ export async function POST(
         }
 
         controller.close()
+
+        if (content.trim()) {
+          after(async () => {
+            try {
+              const newFacts = await aiClient.extractMemories(
+                content,
+                aiResponse,
+                memories.map(m => m.content)
+              )
+
+              if (newFacts.length > 0) {
+                await prisma.memory.createMany({
+                  data: newFacts.map(fact => ({ userId: chat.userId, content: fact })),
+                })
+
+                const total = await prisma.memory.count({ where: { userId: chat.userId } })
+                const MAX_MEMORIES = 50
+                if (total > MAX_MEMORIES) {
+                  const excess = await prisma.memory.findMany({
+                    where: { userId: chat.userId },
+                    orderBy: { createdAt: 'asc' },
+                    take: total - MAX_MEMORIES,
+                    select: { id: true },
+                  })
+                  await prisma.memory.deleteMany({
+                    where: { id: { in: excess.map(e => e.id) } },
+                  })
+                }
+              }
+            } catch (memoryError) {
+              console.error('Memory extraction/save error:', memoryError)
+            }
+          })
+        }
       },
     })
 

@@ -154,28 +154,38 @@ export default function Sidebar({
           ))}
         </div>
 
-        {/* Bottom Actions */}
-        <div className="border-t border-gray-200 p-4 space-y-2">
-          <button className="w-full flex items-center justify-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition">
-            <Settings className="w-5 h-5" />
+        {/* Bottom Section */}
+        <div className="border-t border-gray-200 p-3 space-y-1">
+          {user && (
+            <div className="flex items-center gap-3 px-2 py-2 mb-1">
+              <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                {(user.name || user.email || '?').charAt(0).toUpperCase()}
+              </div>
+              {open && (
+                <div className="min-w-0">
+                  <p className="text-sm font-semibold truncate text-gray-900">{user.name}</p>
+                  {user.email && (
+                    <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+          <button
+            onClick={() => router.push('/settings')}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 transition"
+          >
+            <Settings className="w-5 h-5 flex-shrink-0" />
             {open && <span className="text-sm">Settings</span>}
           </button>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-600 transition"
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-gray-600 hover:bg-red-50 hover:text-red-600 transition"
           >
-            <LogOut className="w-5 h-5" />
+            <LogOut className="w-5 h-5 flex-shrink-0" />
             {open && <span className="text-sm">Logout</span>}
           </button>
         </div>
-
-        {/* User Info */}
-        {open && user && (
-          <div className="border-t border-gray-200 p-4">
-            <p className="text-xs text-gray-400">Signed in as</p>
-            <p className="text-sm font-semibold truncate text-gray-900">{user.name}</p>
-          </div>
-        )}
       </div>
 
       {/* Mobile overlay */}
