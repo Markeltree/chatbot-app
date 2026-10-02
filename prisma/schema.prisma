@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String?
+  avatar    String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  chats Chat[]
+  settings UserSettings?
+
+  @@map("users")
+}
+
+model UserSettings {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  theme     String   @default("dark")
+  language  String   @default("en")
+  aiProvider String  @default("anthropic")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_settings")
+}
+
+model Chat {
+  id        String     @id @default(cuid())
+  userId    String
+  title     String     @default("New Chat")
+  status    String     @default("active")
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages Message[]
+
+  @@index([userId])
+  @@map("chats")
+}
+
+model Message {
+  id        String     @id @default(cuid())
+  chatId    String
+  role      String     // "user" or "assistant"
+  content   String     @db.Text
+  modelUsed String     @default("claude-3-5-sonnet")
+  tokens    Int        @default(0)
+  createdAt DateTime   @default(now())
+
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  attachments FileAttachment[]
+
+  @@index([chatId])
+  @@map("messages")
+}
+
+model FileAttachment {
+  id        String     @id @default(cuid())
+  messageId String
+  fileName  String
+  fileType  String
+  fileSize  Int
+  fileUrl   String
+  mimeType  String
+  createdAt DateTime   @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@index([messageId])
+  @@map("file_attachments")
+}
