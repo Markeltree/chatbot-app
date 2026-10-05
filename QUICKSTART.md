@@ -1,4 +1,4 @@
-# Quick Start Guide
+# ReplyWise: AI Chatbot Platform — Quick Start Guide
 
 ## 5-Minute Setup
 

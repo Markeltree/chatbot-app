@@ -1,4 +1,4 @@
-# Deployment Guide
+# ReplyWise: AI Chatbot Platform — Deployment Guide
 
 ## Vercel (Recommended - Easiest)
 

@@ -32,7 +32,8 @@ import {
 } from 'lucide-react'
 
 // Rename here to rebrand the whole page.
-const BRAND = 'AI Chatbot'
+const BRAND = 'ReplyWise'
+const BRAND_FULL = 'ReplyWise: AI Chatbot Platform'
 
 /* ------------------------------------------------------------------ */
 /* Content                                                             */
@@ -189,7 +190,10 @@ function Logo({ dark = false }: { dark?: boolean }) {
       <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-sm shadow-violet-500/30">
         <Bot className="h-4 w-4 text-white" />
       </span>
-      <span className={dark ? 'text-white' : 'text-gray-900'}>{BRAND}</span>
+      <span className="flex flex-col leading-tight">
+        <span className={dark ? 'text-white' : 'text-gray-900'}>{BRAND}</span>
+        <span className={`text-[10px] font-medium ${dark ? 'text-gray-400' : 'text-gray-500'}`}>AI Chatbot Platform</span>
+      </span>
     </span>
   )
 }
@@ -878,7 +882,7 @@ export default function Home() {
           </div>
 
           <div className="flex flex-col justify-between gap-3 border-t border-white/10 pt-8 text-sm sm:flex-row">
-            <span>© {new Date().getFullYear()} {BRAND}. All rights reserved.</span>
+            <span>© {new Date().getFullYear()} {BRAND_FULL}. All rights reserved.</span>
             <span>Built with Next.js, Claude &amp; Gemini</span>
           </div>
         </div>

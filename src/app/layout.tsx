@@ -3,8 +3,8 @@ import { Providers } from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'AI Chatbot',
-  description: 'ChatGPT-like AI Assistant with Anthropic and Gemini',
+  title: 'ReplyWise: AI Chatbot Platform',
+  description: 'ReplyWise: AI Chatbot Platform powered by Anthropic Claude and Google Gemini',
   icons: {
     icon: '/favicon.ico',
   },

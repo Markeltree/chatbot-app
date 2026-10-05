@@ -99,7 +99,7 @@ export default function Sidebar({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           {open && (
-            <h1 className="text-xl font-bold gradient-text">AI Chatbot</h1>
+            <h1 className="text-xl font-bold gradient-text">ReplyWise</h1>
           )}
           <button
             onClick={() => setOpen(!open)}

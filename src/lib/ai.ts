@@ -23,7 +23,7 @@ class AIClient {
 
   async streamChatWithAnthropic(
     messages: AIMessage[],
-    systemPrompt: string = 'You are a helpful AI assistant.'
+    systemPrompt: string = 'You are ReplyWise, a helpful AI assistant.'
   ): Promise<AsyncIterable<string>> {
     const stream = await this.anthropic.messages.stream({
       model: 'claude-opus-5-5',
@@ -40,7 +40,7 @@ class AIClient {
 
   async streamChatWithGemini(
     messages: AIMessage[],
-    systemPrompt: string = 'You are a helpful AI assistant.'
+    systemPrompt: string = 'You are ReplyWise, a helpful AI assistant.'
   ): Promise<AsyncIterable<string>> {
     const model = this.gemini.getGenerativeModel({
       model: 'gemini-1.5-flash',

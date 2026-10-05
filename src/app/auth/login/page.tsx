@@ -56,7 +56,8 @@ export default function LoginPage() {
             <div className="inline-block p-3 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl shadow-lg shadow-violet-500/30 mb-4">
               <Bot className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold gradient-text mb-2">AI Chatbot</h1>
+            <h1 className="text-3xl font-bold gradient-text">ReplyWise</h1>
+            <p className="text-xs font-medium uppercase tracking-wider text-gray-400 mb-2">AI Chatbot Platform</p>
             <p className="text-gray-500">Sign in to your account</p>
           </div>
 

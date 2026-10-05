@@ -1,7 +1,7 @@
 {
-  "name": "ai-chatbot",
+  "name": "replywise",
   "version": "1.0.0",
-  "description": "ChatGPT-like AI Chatbot with Next.js, Anthropic, and Gemini",
+  "description": "ReplyWise: AI Chatbot Platform built with Next.js, Anthropic, and Gemini",
   "private": true,
   "scripts": {
     "dev": "next dev",
