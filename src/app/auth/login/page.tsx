@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
-import { Mail, Lock, Loader2 } from 'lucide-react'
+import { Loader2, Bot } from 'lucide-react'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -53,8 +53,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         <div className="glass-effect p-8 rounded-2xl">
           <div className="text-center mb-8">
-            <div className="inline-block p-3 bg-blue-600 rounded-lg mb-4">
-              <Mail className="w-8 h-8 text-white" />
+            <div className="inline-block p-3 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl shadow-lg shadow-violet-500/30 mb-4">
+              <Bot className="w-8 h-8 text-white" />
             </div>
             <h1 className="text-3xl font-bold gradient-text mb-2">AI Chatbot</h1>
             <p className="text-gray-500">Sign in to your account</p>
@@ -71,7 +71,7 @@ export default function LoginPage() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 outline-none transition"
                 placeholder="you@example.com"
                 required
               />
@@ -87,7 +87,7 @@ export default function LoginPage() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition"
+                className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 outline-none transition"
                 placeholder="••••••••"
                 required
               />
@@ -96,7 +96,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full bg-violet-600 hover:bg-violet-700 text-white font-semibold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -111,7 +111,7 @@ export default function LoginPage() {
 
           <p className="text-center text-gray-500 mt-6 text-sm">
             Don't have an account?{' '}
-            <Link href="/auth/signup" className="text-blue-600 hover:text-blue-700">
+            <Link href="/auth/signup" className="text-violet-600 hover:text-violet-700">
               Sign up
             </Link>
           </p>

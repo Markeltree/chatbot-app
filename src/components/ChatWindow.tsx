@@ -247,9 +247,9 @@ export default function ChatWindow({ chatId, onNewChat }: ChatWindowProps) {
           {loading && messages[messages.length - 1]?.role !== 'assistant' && (
             <div className="flex justify-start">
               <div className="glass-effect px-4 py-2 rounded-lg flex gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" />
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.2s' }} />
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.4s' }} />
+                <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse-slow" />
+                <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.2s' }} />
+                <div className="w-2 h-2 bg-violet-500 rounded-full animate-pulse-slow" style={{ animationDelay: '0.4s' }} />
               </div>
             </div>
           )}
@@ -291,7 +291,7 @@ export default function ChatWindow({ chatId, onNewChat }: ChatWindowProps) {
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="p-2 hover:bg-gray-100 rounded-lg transition text-gray-500 hover:text-blue-600"
+            className="p-2 hover:bg-gray-100 rounded-lg transition text-gray-500 hover:text-violet-600"
             title="Attach file"
           >
             <Paperclip className="w-5 h-5" />
@@ -309,7 +309,7 @@ export default function ChatWindow({ chatId, onNewChat }: ChatWindowProps) {
             className={`p-2 rounded-lg transition ${
               isRecording
                 ? 'bg-red-50 text-red-500'
-                : 'hover:bg-gray-100 text-gray-500 hover:text-blue-600'
+                : 'hover:bg-gray-100 text-gray-500 hover:text-violet-600'
             }`}
             title="Record audio"
           >
@@ -321,14 +321,14 @@ export default function ChatWindow({ chatId, onNewChat }: ChatWindowProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 px-4 py-2 rounded-full bg-white border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition"
+            className="flex-1 px-4 py-2 rounded-full bg-white border border-gray-300 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 outline-none transition"
             disabled={loading}
           />
 
           <button
             type="submit"
             disabled={loading || (!input.trim() && attachedFiles.length === 0)}
-            className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 bg-violet-600 hover:bg-violet-700 text-white rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <Loader2 className="w-5 h-5 animate-spin" />

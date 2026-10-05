@@ -99,7 +99,7 @@ export default function Sidebar({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           {open && (
-            <h1 className="text-xl font-bold gradient-text">ChatBot</h1>
+            <h1 className="text-xl font-bold gradient-text">AI Chatbot</h1>
           )}
           <button
             onClick={() => setOpen(!open)}
@@ -112,7 +112,7 @@ export default function Sidebar({
         {/* New Chat */}
         <button
           onClick={handleNewChat}
-          className="m-4 flex items-center justify-center gap-2 w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-full transition-all"
+          className="m-4 flex items-center justify-center gap-2 w-auto bg-violet-600 hover:bg-violet-700 text-white font-semibold py-2 px-4 rounded-full transition-all"
         >
           <Plus className="w-5 h-5" />
           {open && 'New Chat'}
@@ -125,7 +125,7 @@ export default function Sidebar({
               key={chat.id}
               className={`group w-full flex items-center rounded-lg transition-all ${
                 activeChat === chat.id
-                  ? 'bg-blue-50 text-blue-700'
+                  ? 'bg-violet-100 text-violet-700'
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
@@ -158,7 +158,7 @@ export default function Sidebar({
         <div className="border-t border-gray-200 p-3 space-y-1">
           {user && (
             <div className="flex items-center gap-3 px-2 py-2 mb-1">
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-500 to-indigo-600 text-white flex items-center justify-center text-sm font-semibold flex-shrink-0">
                 {(user.name || user.email || '?').charAt(0).toUpperCase()}
               </div>
               {open && (

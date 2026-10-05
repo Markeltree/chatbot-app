@@ -32,7 +32,7 @@ html {
 }
 
 .gradient-text {
-  @apply text-blue-600;
+  @apply bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent;
 }
 
 .glass-effect {
@@ -52,7 +52,7 @@ html {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  @apply bg-blue-500;
+  @apply bg-violet-500;
   animation: pulse-slow 1.4s ease-in-out infinite;
 }
 
@@ -62,4 +62,33 @@ html {
 
 .loading-dots span:nth-child(3) {
   animation-delay: 0.4s;
+}
+
+/* Landing page */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(124 58 237 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(124 58 237 / 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-slow {
+    animation: none;
+  }
 }

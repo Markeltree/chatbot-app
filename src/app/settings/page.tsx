@@ -80,7 +80,7 @@ export default function SettingsPage() {
         </button>
 
         <div className="flex items-center gap-3 mb-2">
-          <Brain className="w-6 h-6 text-blue-600" />
+          <Brain className="w-6 h-6 text-violet-600" />
           <h1 className="text-2xl font-bold">Memory</h1>
         </div>
         <p className="text-gray-500 mb-6">
@@ -90,7 +90,7 @@ export default function SettingsPage() {
 
         {loading ? (
           <div className="flex items-center justify-center py-16">
-            <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+            <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
           </div>
         ) : memories.length === 0 ? (
           <div className="text-center py-16 text-gray-500">

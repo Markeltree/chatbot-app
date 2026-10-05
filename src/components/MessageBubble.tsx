@@ -36,7 +36,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
       <div
         className={`max-w-2xl px-4 py-3 rounded-lg ${
           isUser
-            ? 'bg-blue-600 text-white'
+            ? 'bg-gradient-to-br from-violet-600 to-indigo-600 text-white'
             : 'bg-gray-100 border border-gray-200 text-gray-900'
         }`}
       >
@@ -72,7 +72,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
                   target={url ? '_blank' : undefined}
                   rel="noopener noreferrer"
                   className={`text-xs px-2 py-1 rounded ${
-                    isUser ? 'bg-blue-700/50' : 'bg-gray-200'
+                    isUser ? 'bg-violet-700/50' : 'bg-gray-200'
                   }`}
                 >
                   📎 {name}
@@ -82,7 +82,11 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           </div>
         )}
 
-        <div className="prose prose-sm max-w-none">
+        <div
+          className={`prose prose-sm max-w-none ${
+            isUser ? 'prose-invert text-white [&_code]:!bg-white/20 [&_code]:!text-white' : ''
+          }`}
+        >
           <ReactMarkdown
             components={{
               code: ({ node, className, children, ...props }) => {
