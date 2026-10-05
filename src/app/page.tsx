@@ -13,8 +13,9 @@ import {
   ChevronRight,
   Clock,
   FileText,
-  Github,
+  Facebook,
   Image as ImageIcon,
+  Instagram,
   Layers,
   Linkedin,
   Mic,
@@ -26,9 +27,7 @@ import {
   Send,
   ShieldCheck,
   Sparkles,
-  Twitter,
   Video,
-  Youtube,
   Zap,
 } from 'lucide-react'
 
@@ -163,6 +162,21 @@ const ctaAvatars = [
   { initials: 'OS', color: 'bg-sky-500', pos: 'right-[8%] top-[16%]', size: 'h-14 w-14' },
   { initials: 'MZ', color: 'bg-rose-500', pos: 'right-[20%] top-[56%]', size: 'h-10 w-10' },
   { initials: 'SL', color: 'bg-indigo-500', pos: 'right-[6%] bottom-[8%]', size: 'h-12 w-12' },
+]
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )
+}
+
+const socialLinks = [
+  { label: 'Facebook', href: 'https://www.facebook.com/markeltree', icon: Facebook },
+  { label: 'X', href: 'https://x.com/markeltree', icon: XIcon },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/markeltree/', icon: Linkedin },
+  { label: 'Instagram', href: 'https://www.instagram.com/markeltree', icon: Instagram },
 ]
 
 /* ------------------------------------------------------------------ */
@@ -854,8 +868,8 @@ export default function Home() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-white">Follow us</p>
               <div className="mt-5 flex gap-2">
-                {[Twitter, Linkedin, Github, Youtube].map((Icon, i) => (
-                  <a key={i} href="#" aria-label="Social link" className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 hover:bg-white/10 hover:text-white">
+                {socialLinks.map(({ label, href, icon: Icon }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/10 hover:bg-white/10 hover:text-white">
                     <Icon className="h-4 w-4" />
                   </a>
                 ))}
